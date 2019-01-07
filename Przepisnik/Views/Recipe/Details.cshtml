@@ -106,6 +106,28 @@
             @Html.DisplayFor(model => model.AverageRating)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.RecipeCategories)
+        </dt>
+        <dd>
+            <table class="table">
+                <tr>
+                    <th>Category</th>
+                    
+                </tr>
+                @foreach (var item in Model.RecipeCategories)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                        </td>
+                        
+                    </tr>
+                }
+            </table>
+        </dd>
+
+
     </dl>
 </div>
 <p>

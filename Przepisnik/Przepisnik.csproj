@@ -198,8 +198,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RecipeCategoryController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Data\RecipesDBContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -342,6 +344,16 @@
     <Content Include="Views\Recipe\Details.cshtml" />
     <Content Include="Views\Recipe\Edit.cshtml" />
     <Content Include="Views\Recipe\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\RecipeCategory\Create.cshtml" />
+    <Content Include="Views\RecipeCategory\Delete.cshtml" />
+    <Content Include="Views\RecipeCategory\Details.cshtml" />
+    <Content Include="Views\RecipeCategory\Edit.cshtml" />
+    <Content Include="Views\RecipeCategory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

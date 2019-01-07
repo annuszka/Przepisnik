@@ -11,114 +11,107 @@ using Przepisnik.Models;
 
 namespace Przepisnik.Controllers
 {
-    public class RecipeController : Controller
+    public class CategoryController : Controller
     {
         private RecipesDBContext db = new RecipesDBContext();
 
-        // GET: Recipe
+        // GET: Category
         public ActionResult Index()
         {
-            return View(db.Recipes.ToList());
+            return View(db.Categories.ToList());
         }
 
-        // GET: Recipe/Details/5
+        // GET: Category/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipes.Find(id);
-            if (recipe == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(recipe);
+            return View(category);
         }
 
-        // GET: Recipe/Create
+        // GET: Category/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Recipe/Create
+        // POST: Category/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Title,RecipePhotoUrl,AddingDate,Description,Ingredients,Preparation,PrepTime,Portions,Source,IfPublic,UserId,AverageRating")] Recipe recipe)
+        public ActionResult Create([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Recipes.Add(recipe);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.Categories.Add(category);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch (DataException /* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
-            }
-            return View(recipe);
+
+            return View(category);
         }
 
-        // GET: Recipe/Edit/5
+        // GET: Category/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipes.Find(id);
-            if (recipe == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(recipe);
+            return View(category);
         }
 
-        // POST: Recipe/Edit/5
+        // POST: Category/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecipeID,Title,RecipePhotoUrl,AddingDate,Description,Ingredients,Preparation,PrepTime,Portions,Source,IfPublic,UserId,AverageRating")] Recipe recipe)
+        public ActionResult Edit([Bind(Include = "CategoryID,CategoryName")] Category category)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(recipe).State = EntityState.Modified;
+                db.Entry(category).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(recipe);
+            return View(category);
         }
 
-        // GET: Recipe/Delete/5
+        // GET: Category/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipes.Find(id);
-            if (recipe == null)
+            Category category = db.Categories.Find(id);
+            if (category == null)
             {
                 return HttpNotFound();
             }
-            return View(recipe);
+            return View(category);
         }
 
-        // POST: Recipe/Delete/5
+        // POST: Category/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Recipe recipe = db.Recipes.Find(id);
-            db.Recipes.Remove(recipe);
+            Category category = db.Categories.Find(id);
+            db.Categories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
