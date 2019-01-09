@@ -84,35 +84,60 @@ namespace Przepisnik.Controllers
         // POST: Recipe/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "RecipeID,Title,RecipePhotoUrl,AddingDate,Description,Ingredients,Preparation,PrepTime,Portions,Source,IfPublic,UserId,AverageRating")] Recipe recipe)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(recipe).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(recipe);
-        }
-
-        // GET: Recipe/Delete/5
-        public ActionResult Delete(int? id)
-        {
+            //[Bind(Include = "RecipeID,Title,RecipePhotoUrl,AddingDate,Description,Ingredients,Preparation,PrepTime,Portions,Source,IfPublic,UserId,AverageRating")] Recipe recipe
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Recipe recipe = db.Recipes.Find(id);
-            if (recipe == null)
+            var recipeToUpdate = db.Recipes.Find(id);
+            if (TryUpdateModel(recipeToUpdate, "",
+               new string[] { "Title", "RecipePhotoUrl", "AddingDate", "Description", "Ingredients", "Preparation", "PrepTime", "Portions", "Source", "IfPublic", "UserId", "AverageRating" }))
             {
-                return HttpNotFound();
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
             }
-            return View(recipe);
+            return View(recipeToUpdate);
         }
 
-        // POST: Recipe/Delete/5
+
+            /*  if (ModelState.IsValid)
+                  {
+                      db.Entry(recipe).State = EntityState.Modified;
+                      db.SaveChanges();
+                      return RedirectToAction("Index");
+                  }
+                  return View(recipe);
+                  }
+                  */
+            // GET: Recipe/Delete/5
+            public ActionResult Delete(int? id)
+                {
+                    if (id == null)
+                    {
+                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                    }
+                    Recipe recipe = db.Recipes.Find(id);
+                    if (recipe == null)
+                    {
+                        return HttpNotFound();
+                    }
+                    return View(recipe);
+                }
+
+// POST: Recipe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

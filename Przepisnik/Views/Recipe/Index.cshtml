@@ -50,50 +50,52 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RecipePhotoUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AddingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ingredients)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Preparation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PrepTime)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Portions)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Source)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IfPublic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AverageRating)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RecipeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RecipeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RecipeID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipePhotoUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ingredients)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Preparation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrepTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Portions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Source)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IfPublic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AverageRating)
+            </td>
+            
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RecipeID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.RecipeID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RecipeID })
+                </td>
+                </tr>
+            }
 
 </table>
