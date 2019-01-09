@@ -113,38 +113,52 @@ namespace Przepisnik.Controllers
         }
 
 
-            /*  if (ModelState.IsValid)
-                  {
-                      db.Entry(recipe).State = EntityState.Modified;
-                      db.SaveChanges();
-                      return RedirectToAction("Index");
-                  }
-                  return View(recipe);
-                  }
-                  */
-            // GET: Recipe/Delete/5
-            public ActionResult Delete(int? id)
-                {
-                    if (id == null)
-                    {
-                        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                    }
-                    Recipe recipe = db.Recipes.Find(id);
-                    if (recipe == null)
-                    {
-                        return HttpNotFound();
-                    }
-                    return View(recipe);
-                }
+        /*  if (ModelState.IsValid)
+              {
+                  db.Entry(recipe).State = EntityState.Modified;
+                  db.SaveChanges();
+                  return RedirectToAction("Index");
+              }
+              return View(recipe);
+              }
+              */
 
-// POST: Recipe/Delete/5
+        // GET: Recipe/Delete/5
+        public ActionResult Delete(int? id, bool? saveChangesError = false)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+            }
+            Recipe recipe = db.Recipes.Find(id);
+            if (recipe == null)
+            {
+                return HttpNotFound();
+            }
+            return View(recipe);
+        }
+
+        // POST: Recipe/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete(int id)
         {
-            Recipe recipe = db.Recipes.Find(id);
-            db.Recipes.Remove(recipe);
-            db.SaveChanges();
+            try
+            {
+                Recipe recipe = db.Recipes.Find(id);
+                db.Recipes.Remove(recipe);
+                db.SaveChanges();
+            }
+            catch (DataException/* dex */)
+            {
+
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 
