@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Przepisnik.Data;
 using Przepisnik.Models;
+using PagedList;
 
 namespace Przepisnik.Controllers
 {
@@ -16,11 +17,23 @@ namespace Przepisnik.Controllers
         private RecipesDBContext db = new RecipesDBContext();
 
         // GET: Recipe
-        public ActionResult Index(string sortOrder, string searchString)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.TitleSortParm = sortOrder == "title" ? "title_desc" : "title";
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             var recipes = from r in db.Recipes
                           select r;
             if (!String.IsNullOrEmpty(searchString))
@@ -43,7 +56,11 @@ namespace Przepisnik.Controllers
                     recipes = recipes.OrderByDescending(r => r.AddingDate);
                     break;
             }
-            return View(recipes.ToList());
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1); //if page has value return it, if it is null return 1
+
+            return View(recipes.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Recipe/Details/5

@@ -1,5 +1,8 @@
-﻿@model IEnumerable<Przepisnik.Models.Recipe>
-
+﻿@{ /*model IEnumerable<Przepisnik.Models.Recipe>*/
+}
+@model PagedList.IPagedList<Przepisnik.Models.Recipe>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
@@ -10,53 +13,54 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Recipe", FormMethod.Get)) //method get: form data is passed in the URL as query strings, which enables users to bookmark the URL.
 {
     <p>
-        Znajdź: @Html.TextBox("SearchString")
-        <input type="submit" value="Search" class="btn btn-outline-dark my-2 my-sm-0"/>
+        Znajdź: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control mr-sm-2" })
+        <input type="submit" value="Search" class="btn btn-outline-dark my-2 my-sm-0" />
     </p>
 }
 
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TitleSortParm })
-            <!-- @Html.DisplayNameFor(model => model.Title)-->
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
+           
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RecipePhotoUrl)
+            @{  /*Html.DisplayNameFor(model => model.RecipePhotoUrl)*/
+            }
         </th>
         <th>
-            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DateSortParm })
-            @Html.DisplayNameFor(model => model.AddingDate)
+            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+           
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+          Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ingredients)
+            Html.DisplayNameFor(model => model.Ingredients)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Preparation)
+            Html.DisplayNameFor(model => model.Preparation)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PrepTime)
+            Html.DisplayNameFor(model => model.PrepTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Portions)
+            Html.DisplayNameFor(model => model.Portions)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Source)
+            Html.DisplayNameFor(model => model.Source)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.IfPublic)
+            Html.DisplayNameFor(model => model.IfPublic)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.UserId)
+            Html.DisplayNameFor(model => model.UserId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AverageRating)
+            Html.DisplayNameFor(model => model.AverageRating)
         </th>
         <th></th>
     </tr>
@@ -130,3 +134,9 @@
         </div>
     }
 </div>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
