@@ -1,7 +1,49 @@
-﻿@{
+﻿@model IEnumerable<Przepisnik.ViewModels.PublicRecipes>
+@{
     ViewBag.Title = "About";
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
 <p>Use this area to provide additional information.</p>
+<table>
+    <tr>
+        <th>
+            Enrollment Date
+        </th>
+        <th>
+            Enrollment Date
+        </th>
+        <th>
+            Enrollment Date
+        </th>
+        <th>
+            Enrollment Date
+        </th>
+        <th>
+            Students
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecipeTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PreparationT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descr)
+        </td>
+        
+    </tr>
+    }
+</table>
