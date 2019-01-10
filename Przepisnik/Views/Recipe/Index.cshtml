@@ -12,12 +12,14 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            @Html.ActionLink("Tytuł","Index", new { sortOrder = ViewBag.TitleSortParm })
+            <!-- @Html.DisplayNameFor(model => model.Title)-->
         </th>
         <th>
             @Html.DisplayNameFor(model => model.RecipePhotoUrl)
         </th>
         <th>
+            @Html.ActionLink("Data dodania", "Index", new { sortOrder = ViewBag.DateSortParm })
             @Html.DisplayNameFor(model => model.AddingDate)
         </th>
         <th>
@@ -89,13 +91,33 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AverageRating)
             </td>
-            
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.RecipeID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.RecipeID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.RecipeID })
-                </td>
-                </tr>
-            }
+
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.RecipeID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.RecipeID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.RecipeID })
+            </td>
+        </tr>
+    }
+
 
 </table>
+<br />
+<br />
+<div class="row my-3">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-3">
+            <div class="card border-info my-3 przepis">
+                <img class="card-img-top" src="..\Images\jakieszdjecie.jpg" alt="Card image cap">
+                <div class="card-body text-info">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                    <a class="btn btn - outline - info"> @Html.ActionLink("Więcej..", "Details", new { id = item.RecipeID })</a>
+
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

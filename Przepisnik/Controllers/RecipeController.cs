@@ -16,9 +16,29 @@ namespace Przepisnik.Controllers
         private RecipesDBContext db = new RecipesDBContext();
 
         // GET: Recipe
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            return View(db.Recipes.ToList());
+            ViewBag.TitleSortParm = sortOrder == "title" ? "title_desc" : "title";
+            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
+            
+            var recipes = from r in db.Recipes
+                          select r;
+            switch (sortOrder)
+            {
+                case "title":
+                    recipes = recipes.OrderBy(r => r.Title);
+                    break;
+                case "title_desc":
+                    recipes = recipes.OrderByDescending(r => r.Title);
+                    break;
+                case "Date":
+                    recipes = recipes.OrderBy(r => r.AddingDate);
+                    break;
+                default:
+                    recipes = recipes.OrderByDescending(r => r.AddingDate);
+                    break;
+            }
+            return View(recipes.ToList());
         }
 
         // GET: Recipe/Details/5
@@ -161,7 +181,7 @@ namespace Przepisnik.Controllers
             }
             return RedirectToAction("Index");
         }
-
+        //closing database connection
         protected override void Dispose(bool disposing)
         {
             if (disposing)
