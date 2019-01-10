@@ -16,13 +16,18 @@ namespace Przepisnik.Controllers
         private RecipesDBContext db = new RecipesDBContext();
 
         // GET: Recipe
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.TitleSortParm = sortOrder == "title" ? "title_desc" : "title";
             ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "Date" : "";
             
             var recipes = from r in db.Recipes
                           select r;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                recipes = recipes.Where(r => r.Title.Contains(searchString)
+                                    || r.Description.Contains(searchString));
+            }
             switch (sortOrder)
             {
                 case "title":

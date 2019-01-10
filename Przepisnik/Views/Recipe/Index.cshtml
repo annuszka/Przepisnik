@@ -9,10 +9,19 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Znajdź: @Html.TextBox("SearchString")
+        <input type="submit" value="Search" class="btn btn-outline-dark my-2 my-sm-0"/>
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.ActionLink("Tytuł","Index", new { sortOrder = ViewBag.TitleSortParm })
+            @Html.ActionLink("Tytuł", "Index", new { sortOrder = ViewBag.TitleSortParm })
             <!-- @Html.DisplayNameFor(model => model.Title)-->
         </th>
         <th>
