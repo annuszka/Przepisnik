@@ -7,15 +7,14 @@ using System.Web;
 
 namespace Przepisnik.Models
 {
-    public class Category
+    public class Tag
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CategoryID { get; set; }
-        [Display(Name = "Kategoria"), StringLength(50)]
-        public string CategoryName { get; set; }
+        public int TagID { get; set; }
+        [Display(Name = "Tag"), StringLength(50)]
+        public string TagName { get; set; }
 
-        
-        public virtual ICollection<Recipe> Recipes { get; set; } 
+        public virtual ICollection<Recipe> Recipes { get; set; }
     }
 }
