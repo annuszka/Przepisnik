@@ -221,6 +221,18 @@
     <Compile Include="Migrations\201901052221223_initial.Designer.cs">
       <DependentUpon>201901052221223_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901121810271_StringLengthonRecipe.cs" />
+    <Compile Include="Migrations\201901121810271_StringLengthonRecipe.Designer.cs">
+      <DependentUpon>201901121810271_StringLengthonRecipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901121852267_UpdateDataAnnotationRecipe.cs" />
+    <Compile Include="Migrations\201901121852267_UpdateDataAnnotationRecipe.Designer.cs">
+      <DependentUpon>201901121852267_UpdateDataAnnotationRecipe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201901121958120_UpdatedRecipeandCategory.cs" />
+    <Compile Include="Migrations\201901121958120_UpdatedRecipeandCategory.Designer.cs">
+      <DependentUpon>201901121958120_UpdatedRecipeandCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -383,6 +395,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901052221223_initial.resx">
       <DependentUpon>201901052221223_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121810271_StringLengthonRecipe.resx">
+      <DependentUpon>201901121810271_StringLengthonRecipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121852267_UpdateDataAnnotationRecipe.resx">
+      <DependentUpon>201901121852267_UpdateDataAnnotationRecipe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901121958120_UpdatedRecipeandCategory.resx">
+      <DependentUpon>201901121958120_UpdatedRecipeandCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
