@@ -14,9 +14,15 @@ namespace Przepisnik.Data
         {
         }
 
+
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<RecipeCategory> RecipeCategories { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Favorites> Favorites { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -24,5 +30,6 @@ namespace Przepisnik.Data
             //method prevents table names from being pluralized.
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }
+    
     }
 }

@@ -38,6 +38,7 @@ namespace Przepisnik.Models
         public int AccessRigths { get; set; }
         
         public virtual ICollection<Recipe> Recipes { get; set; }
-        
+        public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Przepisnik.Models
@@ -62,5 +61,9 @@ namespace Przepisnik.Models
         public virtual User Author { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Rating> Ratings { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Favorites> Favorites { get; set; }
+        
     }
 }
